@@ -1,13 +1,16 @@
 'use client'
 
+import dynamic from "next/dynamic";
 import {cn} from "@/utils/cn";
-import {BackgroundGradientAnimation} from "@/components/ui/GradientBg";
 import {GlobeDemo} from "@/components/ui/GridGlobe";
 import Lottie from "react-lottie";
-import {useState} from "react";
+import React, {useState} from "react";
 import animationData from '@/data/confetti.json'
 import MagicButton from "@/components/ui/MagicButton";
 import {IoCopyOutline} from "react-icons/io5";
+const BackgroundGradientAnimation = dynamic(() => import("@/components/ui/GradientBg").then((mod) => mod.BackgroundGradientAnimation), {
+    ssr: false, // Optionally disable SSR if it's client-side only
+});
 
 
 export const BentoGrid = ({

@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+"use client";
 import { cn } from "@/utils/cn";
+import { useEffect, useRef, useState } from "react";
 
 export const BackgroundGradientAnimation = ({
                                                 gradientBackgroundStart = "rgb(108, 0, 162)",
@@ -38,7 +39,6 @@ export const BackgroundGradientAnimation = ({
     const [curY, setCurY] = useState(0);
     const [tgX, setTgX] = useState(0);
     const [tgY, setTgY] = useState(0);
-
     useEffect(() => {
         document.body.style.setProperty(
             "--gradient-background-start",
@@ -58,7 +58,21 @@ export const BackgroundGradientAnimation = ({
         document.body.style.setProperty("--blending-value", blendingValue);
     }, []);
 
-    // Updated mouse move tracking logic
+    useEffect(() => {
+        function move() {
+            if (!interactiveRef.current) {
+                return;
+            }
+            setCurX(curX + (tgX - curX) / 20);
+            setCurY(curY + (tgY - curY) / 20);
+            interactiveRef.current.style.transform = `translate(${Math.round(
+                curX
+            )}px, ${Math.round(curY)}px)`;
+        }
+
+        move();
+    }, [tgX, tgY]);
+
     const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
         if (interactiveRef.current) {
             const rect = interactiveRef.current.getBoundingClientRect();
@@ -66,22 +80,6 @@ export const BackgroundGradientAnimation = ({
             setTgY(event.clientY - rect.top);
         }
     };
-
-    // UseEffect to animate the movement with smooth transition
-    useEffect(() => {
-        const move = () => {
-            if (interactiveRef.current) {
-                setCurX((prevX) => prevX + (tgX - prevX) / 20);
-                setCurY((prevY) => prevY + (tgY - prevY) / 20);
-                interactiveRef.current.style.transform = `translate(${Math.round(
-                    curX
-                )}px, ${Math.round(curY)}px)`;
-            }
-        };
-
-        const animationFrameId = requestAnimationFrame(move);
-        return () => cancelAnimationFrame(animationFrameId); // Clean up the animation frame
-    }, [curX, curY, tgX, tgY]);
 
     const [isSafari, setIsSafari] = useState(false);
     useEffect(() => {
@@ -120,7 +118,52 @@ export const BackgroundGradientAnimation = ({
                     isSafari ? "blur-2xl" : "[filter:url(#blurMe)_blur(40px)]"
                 )}
             >
-                {/* Your gradient divs */}
+                <div
+                    className={cn(
+                        `absolute [background:radial-gradient(circle_at_center,_var(--first-color)_0,_var(--first-color)_50%)_no-repeat]`,
+                        `[mix-blend-mode:var(--blending-value)] w-[var(--size)] h-[var(--size)] top-[calc(50%-var(--size)/2)] left-[calc(50%-var(--size)/2)]`,
+                        `[transform-origin:center_center]`,
+                        `animate-first`,
+                        `opacity-100`
+                    )}
+                ></div>
+                <div
+                    className={cn(
+                        `absolute [background:radial-gradient(circle_at_center,_rgba(var(--second-color),_0.8)_0,_rgba(var(--second-color),_0)_50%)_no-repeat]`,
+                        `[mix-blend-mode:var(--blending-value)] w-[var(--size)] h-[var(--size)] top-[calc(50%-var(--size)/2)] left-[calc(50%-var(--size)/2)]`,
+                        `[transform-origin:calc(50%-400px)]`,
+                        `animate-second`,
+                        `opacity-100`
+                    )}
+                ></div>
+                <div
+                    className={cn(
+                        `absolute [background:radial-gradient(circle_at_center,_rgba(var(--third-color),_0.8)_0,_rgba(var(--third-color),_0)_50%)_no-repeat]`,
+                        `[mix-blend-mode:var(--blending-value)] w-[var(--size)] h-[var(--size)] top-[calc(50%-var(--size)/2)] left-[calc(50%-var(--size)/2)]`,
+                        `[transform-origin:calc(50%+400px)]`,
+                        `animate-third`,
+                        `opacity-100`
+                    )}
+                ></div>
+                <div
+                    className={cn(
+                        `absolute [background:radial-gradient(circle_at_center,_rgba(var(--fourth-color),_0.8)_0,_rgba(var(--fourth-color),_0)_50%)_no-repeat]`,
+                        `[mix-blend-mode:var(--blending-value)] w-[var(--size)] h-[var(--size)] top-[calc(50%-var(--size)/2)] left-[calc(50%-var(--size)/2)]`,
+                        `[transform-origin:calc(50%-200px)]`,
+                        `animate-fourth`,
+                        `opacity-70`
+                    )}
+                ></div>
+                <div
+                    className={cn(
+                        `absolute [background:radial-gradient(circle_at_center,_rgba(var(--fifth-color),_0.8)_0,_rgba(var(--fifth-color),_0)_50%)_no-repeat]`,
+                        `[mix-blend-mode:var(--blending-value)] w-[var(--size)] h-[var(--size)] top-[calc(50%-var(--size)/2)] left-[calc(50%-var(--size)/2)]`,
+                        `[transform-origin:calc(50%-800px)_calc(50%+800px)]`,
+                        `animate-fifth`,
+                        `opacity-100`
+                    )}
+                ></div>
+
                 {interactive && (
                     <div
                         ref={interactiveRef}
