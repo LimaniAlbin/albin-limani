@@ -117,8 +117,7 @@ const AceternityIcon = ({order}: { order: string; }) => {
     );
 };
 
-// @ts-expect-error
-export const Icon = ({className, ...rest}) => {
+export const Icon = ({className, ...rest}: any) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
