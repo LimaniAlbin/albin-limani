@@ -2,7 +2,6 @@
 
 import {cn} from "@/utils/cn";
 import {BackgroundGradientAnimation} from "@/components/ui/GradientBg";
-import {Globe} from "@/components/ui/Globe";
 import {GlobeDemo} from "@/components/ui/GridGlobe";
 import Lottie from "react-lottie";
 import {useState} from "react";

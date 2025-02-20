@@ -74,7 +74,7 @@ export const projects = [
         id: 1,
         title: "Probit Academy",
         des: "School management system(students, teachers, parents and administration) for the programming school Probit Academy.",
-        img: "probit-academy-page.png",
+        img: "/probit-academy-page.png",
         iconLists: ["/vue.svg", "/bootstrap.svg", "/javascript.svg", "/ts.svg", '/pinia.svg', '/primevue.svg', '/laravel.svg'],
         link: "https://probitschool.com",
     },
@@ -92,7 +92,7 @@ export const projects = [
         des: "A landing page made for the non-profit organization Helvetas, Kosovo Branch.",
         img: "/helvetas.png",
         iconLists: ["/wordpress.svg", "/elementor.svg", "/php.svg"],
-        link: "ui.canva.com",
+        link: "https://helvetas-ks.org/",
     },
 ];
 
