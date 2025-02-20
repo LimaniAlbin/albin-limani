@@ -26,7 +26,7 @@ const Hero = () => {
                     <TextGenerateEffect className="text-center text-[40px] md:text-5xl lg:text-6xl" words="Transforming Concepts into Seamless User Experiences" />
 
                     <p className="text-center md:tracking-wider mb-4 text-sm md:text-lg lg:text-2xl">
-                        I am Albin Limani, a Front-end Developer based in Kosovo.
+                        I am Albin Limani, a Frontend Developer based in Kosovo.
                     </p>
 
                     <a href="#about">
